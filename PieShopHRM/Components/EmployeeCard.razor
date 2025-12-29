@@ -8,8 +8,8 @@
         <div class="card-body employee-card text-center">
             <div class="mb-3">
                 <img 
-                    src="@($"https://gillcleerenpluralsight.blob.core.windows.net/person/{Employee.EmployeeId}.jpg")"
-                    class="employee-img"
+                    src="@Employee.ImageName"
+                    class="employee-img rounded-circle img-fluid"
                 />
             </div>
             <button class="btn btn-primary btn-sm mb-1"
@@ -25,10 +25,11 @@
             *@
             <button class="btn btn-primary btn-sm mb-1"
                 @onclick= "(() => NavigateToDetails(Employee))">
-
                 Full Details
-
             </button>
+            <a href="@($"employeeedit/{Employee.EmployeeId}")" class="btn btn-primary btn-sm mb-1">
+                Edit Employee
+            </a>
 
         </div>
     </div>
