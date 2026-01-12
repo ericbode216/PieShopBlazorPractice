@@ -28,6 +28,9 @@ builder
     )
     .AddHttpMessageHandler<BaseAddressAuthorizationMessageHandler>();
 
+
+builder.Services.AddScoped<ApplicationState>();
+
 builder.Services.AddBlazoredLocalStorage();
 
 builder.Services.AddOidcAuthentication(options =>

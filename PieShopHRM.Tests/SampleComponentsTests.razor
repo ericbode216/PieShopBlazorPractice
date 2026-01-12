@@ -1,0 +1,19 @@
+@code {
+    [Fact]
+    public void RenderSampleComponentWithValueGreaterThanZero(){
+        using var ctx = new BunitContext();
+
+        var cut = ctx.Render(@<SampleComponent MessageCount="3"/>);
+
+        cut.MarkupMatches("<h3>Inbox</h3><h4>You currently have 3 questions from employees!</h4>");
+    }
+
+    [Fact]
+    public void RenderSampleComponentWithZero(){
+        using var ctx = new BunitContext();
+
+        var cut = ctx.Render(@<SampleComponent MessageCount="0"/>);
+
+        cut.MarkupMatches("<h3>Inbox</h3><h4>No questions from employees! All good!</h4>");
+    }
+}
