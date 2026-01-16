@@ -89,6 +89,21 @@ public partial class EmployeeEdit
         }
         else
         {
+            if (selectedFile != null)
+            {
+                var file = selectedFile;
+                Stream stream = file.OpenReadStream();
+                MemoryStream ms = new();
+                await stream.CopyToAsync(ms);
+                stream.Close();
+
+                Employee.ImageName = file.Name;
+                Employee.ImageContent = ms.ToArray();
+            }
+            Console.WriteLine("EmployeeId: " + Employee.EmployeeId);
+            Console.WriteLine("FirstName: " + Employee.FirstName);
+            Console.WriteLine("LastName: " + Employee.LastName);
+            Console.WriteLine("ImageName: " + Employee.ImageName);
             await EmployeeDataService.UpdateEmployee(Employee);
             StatusClass = "alert-success";
             Message = "Employee updated successfully.";
@@ -112,7 +127,8 @@ public partial class EmployeeEdit
 
     protected void NavigateToOverview()
     {
-        NavigationManager.NavigateTo("/employeeoverview");
+        NavigationManager.NavigateTo("/employeeoverview?refreshneeded=true");
+
     }
 
     private IBrowserFile? selectedFile;

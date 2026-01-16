@@ -29,7 +29,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="../PieShopHRM/PieShopHRM.csproj" />
+    <ProjectReference Include="../PieShopHRM.WebAssembly/PieShopHRM.WebAssembly.csproj" />
     <ProjectReference Include="..\BethanysPieShopHRM.Shared\BethanysPieShopHRM.Shared.csproj" />
   </ItemGroup>
 

@@ -10,15 +10,14 @@
 
         <DataAnnotationsValidator/>
         <ValidationSummary/>
-        @if(Employee.EmployeeId == 0)
-        {
-            <div class="row mb-3">
+        
+        <div class="row mb-3">
             <label for="image" class="col-12 col-sm-3">Select Image: </label>
             <div class="col-md-8">
                 <InputFile OnChange="OnInputFileChange" id = "image"></InputFile>
             </div>
         </div>
-        }
+    
         <div class="row mb-3">
             <label for="lastName" class="col-form-label col-md-3">Last name: </label>
             <div class="col-md-8">

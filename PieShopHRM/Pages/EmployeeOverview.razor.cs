@@ -18,9 +18,14 @@ public partial class EmployeeOverview
 
     public List<Employee>? Employees { get; set; } = default!;
 
+    //used to refresh List of Employees and Employee Data after Employee is edited
+    [SupplyParameterFromQuery(Name = "refreshneeded")]
+    public bool refreshneeded { get; set; } = false;
+
     private Employee? _selectedEmployee;
 
     private string Title = "Employee Overview";
+
 
     /*
     protected override void OnInitialized()
@@ -33,7 +38,7 @@ public partial class EmployeeOverview
     protected override async Task OnInitializedAsync()
     {
         //var data = await HttpClient.GetFromJsonAsync<List<Employee>>("http://localhost:7039/api/employee");
-        Employees = (await EmployeeDataService.GetAllEmployees(false)).ToList();
+        Employees = (await EmployeeDataService.GetAllEmployees(refreshneeded)).ToList();
     }
 
     public void ShowQuickViewPopup(Employee selectedEmployee)

@@ -8,6 +8,7 @@ namespace BethanysPieShopHRM.Api.Controllers
     [Route("api/[controller]")]
     [ApiController]
     [Authorize]
+    
     public class EmployeeController : Controller
     {
         private readonly IEmployeeRepository _employeeRepository;
@@ -83,6 +84,19 @@ namespace BethanysPieShopHRM.Api.Controllers
 
             if (employeeToUpdate == null)
                 return NotFound();
+
+            //this if statement will only be done if this is a new image file
+            if(employee.ImageName.Contains("https:") == false)
+            {
+                //handle image upload
+                string currentUrl = _httpContextAccessor.HttpContext.Request.Host.Value;
+                var path = $"{_webHostEnvironment.WebRootPath}//uploads//{employee.ImageName}";
+                var fileStream = System.IO.File.Create(path);
+                fileStream.Write(employee.ImageContent, 0, employee.ImageContent.Length);
+                fileStream.Close();
+
+                employee.ImageName = $"https://{currentUrl}/uploads/{employee.ImageName}";
+            }
 
             _employeeRepository.UpdateEmployee(employee);
 
